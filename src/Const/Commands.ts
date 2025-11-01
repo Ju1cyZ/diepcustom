@@ -65,7 +65,7 @@ export const commandDefinitions = {
         id: CommandID.gameSetTank,
         usage: "[tank]",
         description: "Changes your tank to the given class",
-        permissionLevel: AccessLevel.PublicAccess,
+        permissionLevel: AccessLevel.BetaAccess,
         isCheat: true
     },
     game_set_level: {
