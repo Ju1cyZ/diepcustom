@@ -17,6 +17,8 @@
 */
 
 import Client from "../Client";
+import { maxPlayerLevel } from "../config";
+import { Stat, Tank } from "../Const/Enums";
 import ShapeManager from "../Entity/Shape/Manager";
 import TankBody from "../Entity/Tank/TankBody";
 import GameServer from "../Game";
@@ -33,5 +35,38 @@ export default class SpeedrunArena extends ArenaEntity {
 
     public spawnPlayer(tank: TankBody, client: Client): void {
         super.spawnPlayer(tank, client);
+
+        tank.cameraEntity.cameraData.values.statsAvailable = 3; // Give 3 stat points by default
+
+        // Set speedrun max stats limits
+        tank.cameraEntity.cameraData.values.statLimits[Stat.MovementSpeed] = 15;
+        tank.cameraEntity.cameraData.values.statLimits[Stat.Reload] = 15;
+        tank.cameraEntity.cameraData.values.statLimits[Stat.BulletDamage] = 15;
+        tank.cameraEntity.cameraData.values.statLimits[Stat.BulletPenetration] = 15;
+        tank.cameraEntity.cameraData.values.statLimits[Stat.BulletSpeed] = 15;
+        tank.cameraEntity.cameraData.values.statLimits[Stat.BodyDamage] = 15;
+        tank.cameraEntity.cameraData.values.statLimits[Stat.MaxHealth] = 15;
+        tank.cameraEntity.cameraData.values.statLimits[Stat.HealthRegen] = 15;
+
+        tank.cameraEntity.cameraData.values.statLevels[Stat.MovementSpeed] = 2; // Start with movement speed level 2
+
+        // Garder une référence au tank d'origine
+        const originalSetTank = tank.setTank;
+
+        // Surcharger la méthode setTank
+        tank.setTank = function (id: Tank) {
+
+            // Appeler la méthode originale
+            originalSetTank.call(this, id);
+
+            tank.cameraEntity.cameraData.values.statLimits[Stat.MovementSpeed] = 15;
+            tank.cameraEntity.cameraData.values.statLimits[Stat.Reload] = 15;
+            tank.cameraEntity.cameraData.values.statLimits[Stat.BulletDamage] = 15;
+            tank.cameraEntity.cameraData.values.statLimits[Stat.BulletPenetration] = 15;
+            tank.cameraEntity.cameraData.values.statLimits[Stat.BulletSpeed] = 15;
+            tank.cameraEntity.cameraData.values.statLimits[Stat.BodyDamage] = 15;
+            tank.cameraEntity.cameraData.values.statLimits[Stat.MaxHealth] = 15;
+            tank.cameraEntity.cameraData.values.statLimits[Stat.HealthRegen] = 15;
+        };
     }
 }

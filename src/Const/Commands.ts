@@ -57,7 +57,7 @@ export interface CommandDefinition {
 }
 
 export interface CommandCallback {
-    (client: Client, ...args: string[]): string | void 
+    (client: Client, ...args: string[]): string | void
 }
 
 export const commandDefinitions = {
@@ -65,7 +65,7 @@ export const commandDefinitions = {
         id: CommandID.gameSetTank,
         usage: "[tank]",
         description: "Changes your tank to the given class",
-        permissionLevel: AccessLevel.BetaAccess,
+        permissionLevel: AccessLevel.PublicAccess,
         isCheat: true
     },
     game_set_level: {
@@ -225,12 +225,12 @@ export const commandCallbacks = {
     },
     game_claim: (client: Client, entityArg: string) => {
         const TEntity = new Map([
-          ["ArenaCloser", ArenaCloser],
-          ["Dominator", Dominator],
-          ["Mothership", Mothership],
-          ["Shape", AbstractShape],
-          ["Boss", AbstractBoss],
-          ["AutoTurret", AutoTurret]
+            ["ArenaCloser", ArenaCloser],
+            ["Dominator", Dominator],
+            ["Mothership", Mothership],
+            ["Shape", AbstractShape],
+            ["Boss", AbstractBoss],
+            ["AutoTurret", AutoTurret]
         ] as [string, typeof ObjectEntity][]).get(entityArg)
 
         if (!TEntity || !client.camera?.game.entities.AIs.length) return;
@@ -266,11 +266,11 @@ export const commandCallbacks = {
         if (!game) return;
 
         game.broadcast()
-        .u8(ClientBound.Notification)
-        .stringNT(message)
-        .u32(parseInt(color))
-        .float(parseInt(time))
-        .stringNT(id).send();
+            .u8(ClientBound.Notification)
+            .stringNT(message)
+            .u32(parseInt(color))
+            .float(parseInt(time))
+            .stringNT(id).send();
     },
     game_golden_name: (client: Client, activeArg?: string) => {
         client.setHasCheated(!client.hasCheated());
@@ -320,13 +320,13 @@ export const commandCallbacks = {
     },
     admin_kill_all: (client: Client) => {
         const game = client.camera?.game;
-        if(!game) return;
+        if (!game) return;
         for (let id = 0; id <= game.entities.lastId; ++id) {
             const entity = game.entities.inner[id];
             if (
                 Entity.exists(entity) &&
                 entity instanceof LivingEntity &&
-                entity !== client.camera?.cameraData.player && 
+                entity !== client.camera?.cameraData.player &&
                 !(entity.physicsData.values.flags & PhysicsFlags.showsOnMap)
             ) entity.destroy();
         }
@@ -336,12 +336,12 @@ export const commandCallbacks = {
     },
     admin_kill_entity: (client: Client, entityArg: string) => {
         const TEntity = new Map([
-          ["ArenaCloser", ArenaCloser],
-          ["Dominator", Dominator],
-          ["Bullet", Bullet],
-          ["Tank", TankBody],
-          ["Shape", AbstractShape],
-          ["Boss", AbstractBoss]
+            ["ArenaCloser", ArenaCloser],
+            ["Dominator", Dominator],
+            ["Bullet", Bullet],
+            ["Tank", TankBody],
+            ["Shape", AbstractShape],
+            ["Boss", AbstractBoss]
         ] as [string, typeof LivingEntity][]).get(entityArg);
         const game = client.camera?.game;
         if (!TEntity || !game) return;

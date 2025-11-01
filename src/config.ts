@@ -44,7 +44,7 @@ export const host: string = process.env.SERVER_INFO || "unknown";
 export const mode: string = process.env.NODE_ENV || "development";
 
 /** How long the countdown should last until the game is started. By default it is 10 seconds. Set to 0 if you wish to disable this. */
-export const countdownTicks = 10 * tps;
+export const countdownTicks = 1 * tps;
 
 /** Is hosting a rest api */
 export const enableApi: boolean = true;
@@ -90,11 +90,11 @@ export const doVerboseLogs: boolean = false;
 
 /** Access levels of each client. */
 export const enum AccessLevel {
-    FullAccess   = 3,
-    BetaAccess   = 2,
-    kReserved    = 1,
+    FullAccess = 3,
+    BetaAccess = 2,
+    kReserved = 1,
     PublicAccess = 0,
-    NoAccess     = -1
+    NoAccess = -1
 }
 
 /** Every access level, including and above this one is unbannable via client.ban() */
