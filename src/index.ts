@@ -29,6 +29,12 @@ import { ColorsHexCode } from "./Const/Enums";
 import FFAArena from "./Gamemodes/FFA";
 import SandboxArena from "./Gamemodes/Sandbox";
 
+/* Other game modes */
+import Team2Arena from "./Gamemodes/Team2";
+import Team4Arena from "./Gamemodes/Team4";
+import DominationArena from "./Gamemodes/Domination";
+import SpeedrunArena from "./Gamemodes/Speedrun";
+
 const PORT = config.serverPort;
 const ENABLE_API = config.enableApi && config.apiLocation;
 const ENABLE_CLIENT = config.enableClient && config.clientLocation && fs.existsSync(config.clientLocation);
@@ -72,12 +78,12 @@ app.ws("/*", {
         ws.getUserData().client = client;
     },
     message: (ws: WebSocket<ClientWrapper>, message, isBinary) => {
-        const {client} = ws.getUserData();
+        const { client } = ws.getUserData();
         if (!client) throw new Error("Unexistant client for websocket");
         client.onMessage(message, isBinary);
     },
     close: (ws: WebSocket<ClientWrapper>, code, message) => {
-        const {client, ipAddress} = ws.getUserData();
+        const { client, ipAddress } = ws.getUserData();
         if (client) {
             connections.set(ipAddress, connections.get(ipAddress) as number - 1);
             client.onClose(code, message);
@@ -88,7 +94,7 @@ app.ws("/*", {
 
 app.get("/*", (res, req) => {
     util.saveToVLog("Incoming request to " + req.getUrl());
-    res.onAborted(() => {});
+    res.onAborted(() => { });
     if (ENABLE_API && req.getUrl().startsWith(`/${config.apiLocation}`)) {
         switch (req.getUrl().slice(config.apiLocation.length + 1)) {
             case "/":
@@ -144,7 +150,7 @@ app.get("/*", (res, req) => {
 
         res.writeStatus("404 Not Found").end(fs.readFileSync(config.clientLocation + "/404.html"));
         return;
-    } 
+    }
 });
 
 app.listen(PORT, (success) => {
@@ -157,8 +163,14 @@ app.listen(PORT, (success) => {
     // NOTES(0): As of now, both servers run on the same process (and thread) here
     const ffa = new GameServer(FFAArena, "FFA");
     const sbx = new GameServer(SandboxArena, "Sandbox");
-    
-    games.push(ffa, sbx);
+
+    /* Other game modes */
+    const team2 = new GameServer(Team2Arena, "2Teams");
+    const team4 = new GameServer(Team4Arena, "4Teams");
+    const domination = new GameServer(DominationArena, "Domination");
+    const speedrun = new GameServer(SpeedrunArena, "Speedrun");
+
+    games.push(ffa, sbx, team2, team4, domination, speedrun);
 
     util.saveToLog("Servers up", "All servers booted up.", 0x37F554);
     util.log("Dumping endpoint -> gamemode routing table");

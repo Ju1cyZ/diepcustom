@@ -32,9 +32,9 @@ export default class Pentagon extends AbstractShape {
     protected static BASE_ORBIT = AbstractShape.BASE_ORBIT / 2;
     protected static BASE_VELOCITY = AbstractShape.BASE_VELOCITY / 2;
 
-    public constructor(game: GameServer, isAlpha=false, shiny=(Math.random() < 0.000001) && !isAlpha) {
+    public constructor(game: GameServer, isAlpha = false, shiny = (Math.random() < 0.000001) && !isAlpha) {
         super(game);
-        
+
         this.nameData.values.name = isAlpha ? "Alpha Pentagon" : "Pentagon";
 
         this.healthData.values.health = this.healthData.values.maxHealth = (isAlpha ? 3000 : 100);
@@ -50,7 +50,7 @@ export default class Pentagon extends AbstractShape {
 
         this.damagePerTick = isAlpha ? 5 : 3;
         this.scoreReward = isAlpha ? 3000 : 130;
-        
+
         if (shiny) {
             this.scoreReward *= 100;
             this.healthData.values.health = this.healthData.values.maxHealth *= 10;

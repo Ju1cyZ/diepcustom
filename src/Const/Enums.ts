@@ -41,7 +41,8 @@ export const enum Color {
     NecromancerSquare = 16,
     Fallen = 17,
 
-    kMaxColors = 18
+    kMaxColors = 18,
+    EnemyHexagone = 19
 }
 
 /**
@@ -66,66 +67,67 @@ export const ColorsHexCode: Record<Color, number> = {
     [Color.EnemyTank]: 0xF14E54,
     [Color.NecromancerSquare]: 0xFCC376,
     [Color.Fallen]: 0xC0C0C0,
-    [Color.kMaxColors]: 0x000000
+    [Color.kMaxColors]: 0x000000,
+    [Color.EnemyHexagone]: 0xFFA600
 }
 
 /**
  * The IDs for all the tanks, by name.
  */
 export const enum Tank {
-    Basic         = 0,
-    Twin          = 1,
-    Triplet       = 2,
-    TripleShot    = 3,
-    QuadTank      = 4,
-    OctoTank      = 5,
-    Sniper        = 6,
-    MachineGun    = 7,
-    FlankGuard    = 8,
-    TriAngle      = 9,
-    Destroyer     = 10,
-    Overseer      = 11,
-    Overlord      = 12,
-    TwinFlank     = 13,
-    PentaShot     = 14,
-    Assassin      = 15,
-    ArenaCloser   = 16,
-    Necromancer   = 17,
-    TripleTwin    = 18,
-    Hunter        = 19,
-    Gunner        = 20,
-    Stalker       = 21,
-    Ranger        = 22,
-    Booster       = 23,
-    Fighter       = 24,
-    Hybrid        = 25,
-    Manager       = 26,
-    Mothership    = 27,
-    Predator      = 28,
-    Sprayer       = 29,
-    Trapper       = 30,
+    Basic = 0,
+    Twin = 1,
+    Triplet = 2,
+    TripleShot = 3,
+    QuadTank = 4,
+    OctoTank = 5,
+    Sniper = 6,
+    MachineGun = 7,
+    FlankGuard = 8,
+    TriAngle = 9,
+    Destroyer = 10,
+    Overseer = 11,
+    Overlord = 12,
+    TwinFlank = 13,
+    PentaShot = 14,
+    Assassin = 15,
+    ArenaCloser = 16,
+    Necromancer = 17,
+    TripleTwin = 18,
+    Hunter = 19,
+    Gunner = 20,
+    Stalker = 21,
+    Ranger = 22,
+    Booster = 23,
+    Fighter = 24,
+    Hybrid = 25,
+    Manager = 26,
+    Mothership = 27,
+    Predator = 28,
+    Sprayer = 29,
+    Trapper = 30,
     GunnerTrapper = 32,
-    Overtrapper   = 33,
-    MegaTrapper   = 34,
-    TriTrapper    = 35,
-    Smasher       = 36,
-    Landmine      = 37,
-    AutoGunner    = 39,
-    Auto5         = 40,
-    Auto3         = 41,
-    SpreadShot    = 42,
-    Streamliner   = 43,
-    AutoTrapper   = 44,
-    DominatorD    = 45,
-    DominatorG    = 46,
-    DominatorT    = 47,
-    Battleship    = 48,
-    Annihilator   = 49,
-    AutoSmasher   = 50,
-    Spike         = 51,
-    Factory       = 52,
-    Skimmer       = 54,
-    Rocketeer     = 55
+    Overtrapper = 33,
+    MegaTrapper = 34,
+    TriTrapper = 35,
+    Smasher = 36,
+    Landmine = 37,
+    AutoGunner = 39,
+    Auto5 = 40,
+    Auto3 = 41,
+    SpreadShot = 42,
+    Streamliner = 43,
+    AutoTrapper = 44,
+    DominatorD = 45,
+    DominatorG = 46,
+    DominatorT = 47,
+    Battleship = 48,
+    Annihilator = 49,
+    AutoSmasher = 50,
+    Spike = 51,
+    Factory = 52,
+    Skimmer = 54,
+    Rocketeer = 55
 }
 
 /**
@@ -156,62 +158,62 @@ export type ValidScoreboardIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
  * Packet headers for the [serverbound packets](https://github.com/ABCxFF/diepindepth/blob/main/protocol/serverbound.md).
  */
 export const enum ServerBound {
-    Init            = 0x0,
-    Input           = 0x1,
-    Spawn           = 0x2,
-    StatUpgrade     = 0x3,
-    TankUpgrade     = 0x4,
-    Ping            = 0x5,
-    TCPInit         = 0x6,
-    ExtensionFound  = 0x7,
-    ToRespawn       = 0x8,
-    TakeTank        = 0x9
+    Init = 0x0,
+    Input = 0x1,
+    Spawn = 0x2,
+    StatUpgrade = 0x3,
+    TankUpgrade = 0x4,
+    Ping = 0x5,
+    TCPInit = 0x6,
+    ExtensionFound = 0x7,
+    ToRespawn = 0x8,
+    TakeTank = 0x9
 }
 /**
  * Packet headers for the [clientbound packets](https://github.com/ABCxFF/diepindepth/blob/main/protocol/clientbound.md).
  */
 export const enum ClientBound {
-    Update          = 0x0,
-    OutdatedClient  = 0x1,
-    Compressed      = 0x2,
-    Notification    = 0x3,
-    ServerInfo      = 0x4,
-    Ping            = 0x5,
-    PartyCode       = 0x6,
-    Accept          = 0x7,
-    Achievement     = 0x8,
-    InvalidParty    = 0x9,
-    PlayerCount     = 0xA,
-    ProofOfWork     = 0xB
+    Update = 0x0,
+    OutdatedClient = 0x1,
+    Compressed = 0x2,
+    Notification = 0x3,
+    ServerInfo = 0x4,
+    Ping = 0x5,
+    PartyCode = 0x6,
+    Accept = 0x7,
+    Achievement = 0x8,
+    InvalidParty = 0x9,
+    PlayerCount = 0xA,
+    ProofOfWork = 0xB
 }
 
 /**
  * Flags sent within the [input packet](https://github.com/ABCxFF/diepindepth/blob/main/protocol/serverbound.md#0x01-input-packet).
  */
 export const enum InputFlags {
-    leftclick   = 1 << 0,
-    up          = 1 << 1,
-    left        = 1 << 2,
-    down        = 1 << 3,
-    right       = 1 << 4,
-    godmode     = 1 << 5,
-    suicide     = 1 << 6,
-    rightclick  = 1 << 7,
-    levelup     = 1 << 8,
-    gamepad     = 1 << 9,
-    switchtank  = 1 << 10,
-    adblock     = 1 << 11
+    leftclick = 1 << 0,
+    up = 1 << 1,
+    left = 1 << 2,
+    down = 1 << 3,
+    right = 1 << 4,
+    godmode = 1 << 5,
+    suicide = 1 << 6,
+    rightclick = 1 << 7,
+    levelup = 1 << 8,
+    gamepad = 1 << 9,
+    switchtank = 1 << 10,
+    adblock = 1 << 11
 }
 
 /**
  * The flag names for the arena field group.
  */
 export const enum ArenaFlags {
-    noJoining        = 1 << 0,
+    noJoining = 1 << 0,
     showsLeaderArrow = 1 << 1,
-    hiddenScores     = 1 << 2,
-    gameReadyStart   = 1 << 3,
-    canUseCheats     = 1 << 4
+    hiddenScores = 1 << 2,
+    gameReadyStart = 1 << 3,
+    canUseCheats = 1 << 4
 }
 /**
  * The flag names for the team field group.
@@ -223,43 +225,43 @@ export const enum TeamFlags {
  * The flag names for the camera field group.
  */
 export const enum CameraFlags {
-    usesCameraCoords      = 1 << 0,
-    showingDeathStats     = 1 << 1,
-    gameWaitingStart      = 1 << 2
+    usesCameraCoords = 1 << 0,
+    showingDeathStats = 1 << 1,
+    gameWaitingStart = 1 << 2
 }
 /**
  * The flag names for the tsyle field group.
  */
 export const enum StyleFlags {
-    isVisible          = 1 << 0,
-    hasBeenDamaged     = 1 << 1,
-    isFlashing         = 1 << 2,
-    renderFirst        = 1 << 3,
-    isStar             = 1 << 4,
-    isCachable         = 1 << 5,
-    showsAboveParent   = 1 << 6,
-    hasNoDmgIndicator  = 1 << 7
+    isVisible = 1 << 0,
+    hasBeenDamaged = 1 << 1,
+    isFlashing = 1 << 2,
+    renderFirst = 1 << 3,
+    isStar = 1 << 4,
+    isCachable = 1 << 5,
+    showsAboveParent = 1 << 6,
+    hasNoDmgIndicator = 1 << 7
 }
 /**
  * The flag names for the position field group.
  */
 export const enum PositionFlags {
-    absoluteRotation    = 1 << 0,
+    absoluteRotation = 1 << 0,
     canMoveThroughWalls = 1 << 1
 }
 /**
  * The flag names for the physics field group.
  */
 export const enum PhysicsFlags {
-    isTrapezoid             = 1 << 0,
-    showsOnMap              = 1 << 1,
-    doChildrenCollision     = 1 << 2,
-    noOwnTeamCollision      = 1 << 3,
-    isSolidWall             = 1 << 4,
-    onlySameOwnerCollision  = 1 << 5,
-    isBase                  = 1 << 6,
-    _unknown1               = 1 << 7,
-    canEscapeArena          = 1 << 8
+    isTrapezoid = 1 << 0,
+    showsOnMap = 1 << 1,
+    doChildrenCollision = 1 << 2,
+    noOwnTeamCollision = 1 << 3,
+    isSolidWall = 1 << 4,
+    onlySameOwnerCollision = 1 << 5,
+    isBase = 1 << 6,
+    _unknown1 = 1 << 7,
+    canEscapeArena = 1 << 8
 }
 /**
  * The flag names for the barrel field group.

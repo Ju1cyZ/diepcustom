@@ -21,18 +21,35 @@ import AbstractShape from "./AbstractShape";
 
 import { Color } from "../../Const/Enums";
 
-export default class Square extends AbstractShape {
-    public constructor(game: GameServer, shiny = Math.random() < 0.000001) {
-        super(game);
-        this.nameData.values.name = "Square";
-        this.healthData.values.health = this.healthData.values.maxHealth = 10;
-        this.physicsData.values.size = 55 * Math.SQRT1_2;
-        this.physicsData.values.sides = 4;
-        this.styleData.values.color = shiny ? Color.Shiny : Color.EnemySquare;
+/**
+ * Hexagone entity class.
+ */
+export default class Hexagone extends AbstractShape {
+    /** If the Hexagone is an alpha Hexagone or not */
+    public isAlpha: boolean;
 
-        this.damagePerTick = 2;
-        this.scoreReward = 10;
+    protected static BASE_ROTATION = AbstractShape.BASE_ROTATION / 2;
+    protected static BASE_ORBIT = AbstractShape.BASE_ORBIT / 2;
+    protected static BASE_VELOCITY = AbstractShape.BASE_VELOCITY / 2;
+
+    public constructor(game: GameServer, isAlpha = false, shiny = (Math.random() < 0.000001) && !isAlpha) {
+        super(game);
+
+        this.nameData.values.name = isAlpha ? "Alpha Hexagone" : "Hexagone";
+
+        this.healthData.values.health = this.healthData.values.maxHealth = (isAlpha ? 4500 : 150);
+        this.physicsData.values.size = (isAlpha ? 300 : 112) * Math.SQRT1_2;
+        this.physicsData.values.sides = 6;
+        this.styleData.values.color = shiny ? Color.Shiny : Color.EnemyHexagone;
+
+        this.physicsData.values.absorbtionFactor = isAlpha ? 0.05 : 0.5;
+        this.physicsData.values.pushFactor = 15;
+
+        this.isAlpha = isAlpha;
         this.isShiny = shiny;
+
+        this.damagePerTick = isAlpha ? 5 : 3;
+        this.scoreReward = isAlpha ? 4500 : 192;
 
         if (shiny) {
             this.scoreReward *= 100;

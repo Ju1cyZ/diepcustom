@@ -136,7 +136,7 @@ export default class ArenaEntity extends Entity implements TeamGroupEntity {
     /**
      * Finds a spawnable location on the map.
      */
-     public findSpawnLocation(isPlayer: boolean=false): VectorAbstract {
+    public findSpawnLocation(isPlayer: boolean = false): VectorAbstract {
         const pos = {
             x: ~~(Math.random() * this.width - this.width / 2),
             y: ~~(Math.random() * this.height - this.height / 2),
@@ -173,7 +173,7 @@ export default class ArenaEntity extends Entity implements TeamGroupEntity {
 
         return pos;
     }
-    
+
     /** Checks if players or shapes can spawn at the given coordinates. */
     public isValidSpawnLocation(x: number, y: number): boolean {
         // Override in gamemode files
@@ -196,11 +196,11 @@ export default class ArenaEntity extends Entity implements TeamGroupEntity {
 
         scoreboardPlayers.sort((p1, p2) => p2.scoreData.values.score - p1.scoreData.values.score);
         this.leader = scoreboardPlayers[0];
-        
+
         this.arenaData.flags |= ArenaFlags.showsLeaderArrow;
         for (let i: ValidScoreboardIndex = 0; i < scoreboardCount; i = (i + 1) as ValidScoreboardIndex) {
             const player = scoreboardPlayers[i];
-            
+
             if (player.styleData.values.color === Color.Tank) this.arenaData.values.scoreboardColors[i] = Color.ScoreboardBar;
             else this.arenaData.values.scoreboardColors[i] = player.styleData.values.color;
             this.arenaData.values.scoreboardNames[i] = player.nameData.values.name;
@@ -217,7 +217,7 @@ export default class ArenaEntity extends Entity implements TeamGroupEntity {
         const players = this.getAlivePlayers();
         // Sorts them too DONT FORGET
         this.updateScoreboard(players);
-        
+
         if (players.length === 0 && this.state === ArenaState.CLOSING) {
             this.state = ArenaState.CLOSED;
 
@@ -336,8 +336,8 @@ export default class ArenaEntity extends Entity implements TeamGroupEntity {
     /** Spawns the boss into the arena */
     protected spawnBoss() {
         const TBoss = [Guardian, Summoner, FallenOverlord, FallenBooster, Defender]
-            [~~(Math.random() * 5)];
-        
+        [~~(Math.random() * 5)];
+
         this.boss = new TBoss(this.game);
 
         const { x, y } = this.game.arena.findSpawnLocation();
